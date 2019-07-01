@@ -18,7 +18,7 @@ function getScope(scope, method = "get") {
   return async function resolvers(parent, args, context, info) {
     let url = `${baseURL}/${scope}`;
 
-    const { id, qargs } = args;
+    const { id, qargs, input } = args;
 
     // handle detail data
     if (id) {
@@ -32,14 +32,20 @@ function getScope(scope, method = "get") {
 
     //debugger
     //console.log(args);
-    //console.log(url);
-    const { data } = await axios[method](url);
-
+    const { data } = await axios[method](url, input);
+    if (method === "delete") {
+      return { message: `Success delete data ID: [${id}].` };
+    }
     return data;
   };
 }
 
 module.exports = {
+  Mutation: {
+    createPost: getScope("posts", "post"),
+    updatePost: getScope("posts", "put"),
+    deletePost: getScope("posts", "delete")
+  },
   Query: {
     users: getScope("users"),
     user: getScope("users"),
@@ -86,4 +92,3 @@ module.exports = {
     }
   }
 };
-

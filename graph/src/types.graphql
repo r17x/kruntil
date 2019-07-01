@@ -75,3 +75,30 @@ type Query {
   albums(userId: ID): [Album!]!
   album(id: ID!): Album
 }
+
+input PostInput {
+    title: String!
+    body: String!
+    userId: ID!
+}
+
+input CommentInput{
+    name: String!
+    email: String!
+    body: String!
+    postId: ID!
+}
+
+type Message {
+    message: String!
+}
+
+type Mutation {
+    createPost(input: PostInput) : Post 
+    updatePost(id: ID!, input: PostInput): Post
+    deletePost(id: ID!): Message 
+
+    createComment(input: CommentInput) : Comment 
+    updateComment(id: ID!, input:  CommentInput) : Comment 
+    deleteComment(id: ID!) : Message 
+}
