@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Query } from 'react-apollo'
-import { GET_POSTS, GET_POSTS_USER, GET_POST } from 'services/Query'
+import { GET_USERS, GET_POSTS, GET_POSTS_USER, GET_POST } from 'services/Query'
+import { CREATE_POST } from 'services/Mutation'
 import List from 'components/Lists'
 import Tooltip from '@material-ui/core/Tooltip'
 import IconButton from '@material-ui/core/IconButton'
@@ -18,6 +19,7 @@ import Typography from '@material-ui/core/Typography'
 import Comments from 'components/ListComments'
 import ErrorMessage from 'components/Error'
 
+import { Mutation } from 'react-apollo'
 import DialogForm from 'components/DialogForm'
 import FormPost from 'components/FormPost'
 
@@ -43,7 +45,26 @@ export default function Posts({ detail, match }: Props) {
         open={open}
         handleClose={handleClose}
       >
-        <FormPost />
+        <Query query={GET_USERS}>
+          {({ loading, error, data: users }) => (
+            <Mutation mutation={CREATE_POST}>
+              {(createPost, { data }) =>
+                loading ? (
+                  'Loading...'
+                ) : error ? (
+                  'Something wrong.'
+                ) : (
+                  <FormPost
+                    options={users.users}
+                    optionLabel="name"
+                    optionValue="id"
+                    onSubmit={createPost}
+                  />
+                )
+              }
+            </Mutation>
+          )}
+        </Query>
       </DialogForm>
 
       <Query query={query}>

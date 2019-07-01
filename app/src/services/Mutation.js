@@ -1,5 +1,15 @@
 import gql from 'graphql-tag'
 
-export const ADD_USER = gql``
-export const EDIT_USER = gql``
-export const DELETE_USER = gql``
+export const CREATE_POST = gql`
+  mutation post($title: String!, $userId: ID!, $body: String!) {
+    createPost(input: { title: $title, userId: $userId, body: $body }) {
+      id
+      title
+      body
+      userId
+      author {
+        name
+      }
+    }
+  }
+`
