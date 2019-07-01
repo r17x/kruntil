@@ -1,0 +1,60 @@
+{
+  "name": "kruntil",
+  "version": 2,
+  "builds": [
+    {
+      "src": "app/package.json",
+      "use": "@now/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    },
+    {
+      "src": "graph/src/app.js",
+      "use": "@now/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/graphql(.*)",
+      "dest": "graph/src/app.js"
+    },
+    {
+      "src": "/static/(.*)",
+      "headers": {
+        "cache-control": "s-maxage=31536000,immutable"
+      },
+      "dest": "app/static/$1"
+    },
+    {
+      "src": "/favicon.ico",
+      "dest": "app/favicon.ico"
+    },
+    {
+      "src": "/asset-manifest.json",
+      "dest": "app/asset-manifest.json"
+    },
+    {
+      "src": "/manifest.json",
+      "dest": "app/manifest.json"
+    },
+    {
+      "src": "/precache-manifest.(.*)",
+      "dest": "app/precache-manifest.$1"
+    },
+    {
+      "src": "/service-worker.js",
+      "headers": {
+        "cache-control": "s-maxage=0"
+      },
+      "dest": "app/service-worker.js"
+    },
+    {
+      "src": "/(.*)",
+      "headers": {
+        "cache-control": "s-maxage=0"
+      },
+      "dest": "app/index.html"
+    }
+  ]
+}
