@@ -1,31 +1,13 @@
-require("dotenv").config();
-const { GraphQLServer } = require("graphql-yoga");
-const schema = require("./schema");
+const { ApolloServer } = require("apollo-server-micro");
 
-const PORT = process.env.PORT || process.argv[2] || 3000;
+const typeDefs = require("./types");
+const resolvers = require("./resolvers");
 
-const server = new GraphQLServer({
-  schema
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  introspection: true,
+  playground: true
 });
 
-const context = req => ({
-  request: req.request
-});
-
-server.context = context;
-
-const options = {
-  port: PORT,
-  endpoint: "/graphql",
-  playground: "/",
-  defaultPlaygroundQuery: ` `
-};
-
-server
-  .start(options)
-  .then(() => {
-    console.log("Server is running on port " + PORT);
-  })
-  .catch(reason => {
-    console.log(reason);
-  });
+module.exports = server.createHandler();

@@ -12,8 +12,7 @@
 
 ### Development
 - `yarn app:start` for run `create-react-app`.
-- `yarn graph:dev` for run graphql server with `nodemon`.
-- `yarn graph:start` for run graphql server.
+- `yarn graph:dev` for run graphql server with `micro-dev`.
 - `yarn deployment:dev` for run `now dev`.
 
 ### Deployment
