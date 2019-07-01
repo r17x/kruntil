@@ -1,0 +1,20 @@
+{
+  "name": "graph",
+  "version": "1.0.0",
+  "description": "GraphQL Server for Kruntil App.",
+  "author": "ri7nz <radysurya.agus@gmail.com>",
+  "license": "MIT",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "dotenv": "^8.0.0",
+    "graphql-yoga": "^1.17.4",
+    "merge-graphql-schemas": "^1.5.8",
+    "nodemon": "^1.19.1",
+    "query-string": "6.8.1"
+  }
+}
