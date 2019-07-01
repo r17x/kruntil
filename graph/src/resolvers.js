@@ -44,8 +44,13 @@ module.exports = {
   Mutation: {
     createPost: getScope("posts", "post"),
     updatePost: getScope("posts", "put"),
-    deletePost: getScope("posts", "delete")
+    deletePost: getScope("posts", "delete"),
+
+    createComment: getScope("comments", "post"),
+    updateComment: getScope("comments", "put"),
+    deleteComment: getScope("comments", "delete")
   },
+
   Query: {
     users: getScope("users"),
     user: getScope("users"),
