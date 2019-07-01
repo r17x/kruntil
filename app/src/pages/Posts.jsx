@@ -31,9 +31,11 @@ export default function Posts({ detail, match }: Props) {
   const handleClose = () => setOpen(!open)
   return (
     <>
-      <Button onClick={handleClose} color="primary" gutterBottom>
-        Create New Post.
-      </Button>
+      {!detail && (
+        <Button onClick={handleClose} color="primary" gutterBottom>
+          Create New Post.
+        </Button>
+      )}
 
       <DialogForm
         title="Create new Post"

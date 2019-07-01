@@ -37,7 +37,12 @@ const useStyles = makeStyles(theme => ({
       display: 'none',
     },
   },
-  toolbar: theme.mixins.toolbar,
+  toolbar: {
+    ...theme.mixins.toolbar,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   drawerPaper: {
     width: drawerWidth,
   },
@@ -49,6 +54,7 @@ const useStyles = makeStyles(theme => ({
 
 type Props = {
   title: string,
+  appName: string,
   container: object,
   children?: React.node,
   menuList: object,
@@ -58,6 +64,7 @@ type Props = {
 export default function ResponsiveDrawer({
   container,
   title,
+  appName,
   children,
   menuList,
   onClickMenu,
@@ -85,7 +92,11 @@ export default function ResponsiveDrawer({
 
   const drawer = (
     <div>
-      <div className={classes.toolbar} />
+      <div className={classes.toolbar}>
+        <Typography variant="h4" component="h4" gutterBottom gutterTop>
+          {appName}
+        </Typography>
+      </div>
       <Divider />
       <List>{Object.keys(menuList).map(renderListMenu)}</List>
       <Divider />
@@ -152,5 +163,6 @@ export default function ResponsiveDrawer({
 
 ResponsiveDrawer.defaultProps = {
   title: 'App Title',
-    menuList: [],
+  appName: 'KRUNTIL',
+  menuList: [],
 }
