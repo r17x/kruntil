@@ -1,6 +1,6 @@
 import React from 'react'
 import { Query } from 'react-apollo'
-import { GET_ALBUMS, GET_ALBUMS_USER , GET_ALBUM } from 'services/Query'
+import { GET_ALBUMS, GET_ALBUMS_USER, GET_ALBUM } from 'services/Query'
 import List from 'components/Lists'
 import IconButton from '@material-ui/core/IconButton'
 import Circular from 'components/Circular'
@@ -28,7 +28,7 @@ type Props = {
 }
 
 export default function Albums({ detail, match }: Props) {
-const query =
+  const query =
     (detail || match.path.endsWith('albums')) && match.params.id
       ? (detail ? GET_ALBUM : GET_ALBUMS_USER)(match.params.id)
       : GET_ALBUMS
@@ -136,6 +136,7 @@ Albums.Detail = function Detail({ title, photos, author }: AlbumProps) {
       <img src={url} alt={title} />
     </Dialog>
   )
+
   return (
     <div className={classes.root}>
       <ViewPhoto {...selectPhoto} />
