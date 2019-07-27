@@ -10,7 +10,7 @@
     "dev": "micro-dev src/app.js --port 8088"
   },
   "dependencies": {
-    "apollo-server-micro": "2.6.7",
+    "apollo-server-micro": "2.7.2",
     "axios": "^0.19.0",
     "dotenv": "^8.0.0",
     "graphql-yoga": "^1.17.4",
